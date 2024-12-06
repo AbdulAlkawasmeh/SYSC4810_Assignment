@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        run();
+        run();   //runs the main script
     }
 
     public static void run() {
@@ -23,25 +23,25 @@ public class Main {
         System.out.println("7. View private consumer instruments");
 
         while (true) {
+            String password;
             System.out.print("Please enter your username: ");
-            String usernameInput = scanner.nextLine();
-            if (usernameInput != null) {
+            String username = scanner.nextLine();  //username that user enters
+            if (username != null) {
                 try {
-                    List<String> userInfo = Problem2c.retrieveUserInfo(usernameInput);
+                    List<String> userInfo = Problem2c.retrieveUserInfo(username);  //used to retrieve info from password file
 
                     if (userInfo != null) {
-                        String passwordInput;
                         boolean loggedIn = false;
 
                         while (!loggedIn) {
-                            System.out.print("Please enter your password: ");
+                            System.out.print("Please enter your password: ");  //enter password while not logged in
                             System.out.println("\nPress 'E' to exit: ");
-                            passwordInput = scanner.nextLine();
-                            if (passwordInput.equals("E")) {
+                            password = scanner.nextLine();
+                            if (password.equals("E")) {  //exiting the script
                                 run();
                                 return;
                             }
-                            if (Problem4ab.LoginUser(usernameInput, passwordInput)) {
+                            if (Problem4ab.LoginUser(username, password)) { //login with username and password
                                 System.out.println("ACCESS GRANTED!");
                                 String role = userInfo.get(2);
                                 while (true) {
@@ -49,8 +49,8 @@ public class Main {
                                     System.out.println("Please enter the number only (e.g., 1)");
                                     System.out.println("Press 'E' to exit: ");
                                     String operation = scanner.nextLine();
-                                    Problem1c.checkOperations(role, operation);
-                                    if (operation.equalsIgnoreCase("E")) {
+                                    Problem1c.checkOperations(role, operation);  //checks whether the operation is valid for the user
+                                    if (operation.equals("E")) {
                                         run();
                                         return;
                                     }
@@ -66,7 +66,7 @@ public class Main {
                         System.out.println("Would you like to enroll? (Y/N)");
                         String enroll = scanner.nextLine();
                         if (enroll.equals("Y")) {
-                            Problem3a.enrollUser();
+                            Problem3a.enrollUser();  //enrolls user
                             System.out.println("Enrollment complete. Would you like to login? (Y/N)");
                             String login = scanner.nextLine();
                             if (login.equals("Y")) {

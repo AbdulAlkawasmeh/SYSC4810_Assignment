@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Problem3b {
 
-    private static final Set<String> WEAK_PASSWORDS = new HashSet<>();
+    private static final Set<String> WEAK_PASSWORDS = new HashSet<>(); //list of weak passwords
 
     static {
         WEAK_PASSWORDS.add("123456");
@@ -19,16 +19,16 @@ public class Problem3b {
         WEAK_PASSWORDS.add("admin");
     }
 
-    public static boolean isValidPassword(String password, String username) {
-        if (password.length() < 8 || password.length() > 12) {
+    public static boolean isValidPassword(String password, String username) { //password checker
+        if (password.length() < 8 || password.length() > 12) { //checks if password is within allowed size between 8 and 12 characters
             System.out.println("Password must be between 8 and 12 characters.");
             return false;
         }
-        if (password.equals(username)) {
+        if (password.equals(username)) { //checks if password is equal to username
             System.out.println("Username and password cannot be the same.");
             return false;
         }
-        if (WEAK_PASSWORDS.contains(password)) {
+        if (WEAK_PASSWORDS.contains(password)) { //checks if password is weak
             System.out.println("Please choose a stronger password.");
             return false;
         }
@@ -39,16 +39,16 @@ public class Problem3b {
 
         String specialchars = "@#$%^&+=!";
         for (char ch : password.toCharArray()) {
-            if (Character.isUpperCase(ch)) {
+            if (Character.isUpperCase(ch)) { //checks if it includes uppercase
                 uppercase = true;
             }
-            if (Character.isLowerCase(ch)) {
+            if (Character.isLowerCase(ch)) { //checks if it includes lowercase
                 lowercase = true;
             }
-            if (Character.isDigit(ch)) {
+            if (Character.isDigit(ch)) { //checks if it includes digit
                 number = true;
             }
-            if (specialchars.indexOf(ch) != -1) {
+            if (specialchars.indexOf(ch) != -1) { //checks if it includes special characters
                 special = true;
             }
         }
