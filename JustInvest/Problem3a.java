@@ -10,6 +10,7 @@ public class Problem3a {
     public static void enrollUser() { //enrolls new users
         String password;
         while (true) {
+            System.out.print("Enter your username: ");
             String username = scanner.nextLine();
             try {
                 if (Problem2c.retrieveUserInfo(username) != null) { //if the username exists, prevent user from registering
