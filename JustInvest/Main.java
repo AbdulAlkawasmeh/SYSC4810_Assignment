@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
         run();
     }
 
     public static void run() {
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("justInvest System");
         System.out.println("____________________________________");
         System.out.println("Operations available on the system:");
@@ -25,7 +25,6 @@ public class Main {
         while (true) {
             System.out.print("Please enter your username: ");
             String usernameInput = scanner.nextLine();
-
             if (usernameInput != null) {
                 try {
                     List<String> userInfo = Problem2c.retrieveUserInfo(usernameInput);
@@ -36,36 +35,33 @@ public class Main {
 
                         while (!loggedIn) {
                             System.out.print("Please enter your password: ");
-                            System.out.println("Press 'E' to exit): ");
+                            System.out.println("\nPress 'E' to exit: ");
                             passwordInput = scanner.nextLine();
-
                             if (passwordInput.equals("E")) {
                                 run();
                                 return;
                             }
-
                             if (Problem4ab.LoginUser(usernameInput, passwordInput)) {
-
+                                System.out.println("ACCESS GRANTED!");
                                 String role = userInfo.get(2);
-
                                 while (true) {
-                                    Problem1c.showPermissions(role);
                                     System.out.println("Which operation would you like to perform?");
                                     System.out.println("Please enter the number only (e.g., 1)");
-                                    System.out.println("Press 'E' to exit): ");
+                                    System.out.println("Press 'E' to exit: ");
                                     String operation = scanner.nextLine();
                                     Problem1c.checkOperations(role, operation);
-
                                     if (operation.equalsIgnoreCase("E")) {
                                         run();
                                         return;
                                     }
                                 }
-                            } else {
+                            }
+                            else {
                                 System.out.println("Invalid password. Please try again.");
                             }
                         }
-                    } else {
+                    }
+                    else {
                         System.out.println("User not found, please enroll first.");
                         System.out.println("Would you like to enroll? (Y/N)");
                         String enroll = scanner.nextLine();

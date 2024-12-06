@@ -6,46 +6,36 @@ import java.util.Scanner;
 public class Problem4ab {
 
     public static boolean LoginUser(String username, String password) {
+        Scanner scanner = new Scanner(System.in);
         try {
             List<String> userInfo = Problem2c.retrieveUserInfo(username);
-
             if (userInfo != null) {
                 if (Problem2c.verifyUser(username, password)) {
                     String role = userInfo.get(2);
                     if (role.equals("T")) {
-                        Scanner scanner = new Scanner(System.in);
-
                         while (true) {
-                            System.out.print("Set your time (HH:MM, 24-hour format): ");
-                            String timeInput = scanner.nextLine();
-
+                            System.out.print("Set your time (HH:MM): ");
+                            String time = scanner.nextLine();
                             try {
-                                LocalTime userTime = LocalTime.parse(timeInput);
-
-                                if (Problem1c.checkTime(userTime)) {
+                                if (Problem1c.checkTime(LocalTime.parse(time))) {
                                     System.out.println("ACCESS GRANTED!");
                                     break;
                                 } else {
                                     System.out.println("Access Denied: Tellers can only access the system between 9:00 AM and 5:00 PM.");
-                                    System.out.println("Returning to the main screen...");
-                                    return false;
                                 }
                             } catch (Exception e) {
                                 System.out.println("Invalid time format.");
                             }
                         }
                     }
-
                     System.out.println("\n--- User Details ---");
                     System.out.println("Username: " + username);
                     System.out.println("Role: " + role);
                     System.out.println("Permissions:");
                     Problem1c.showPermissions(role);
                     System.out.println("---------------------\n");
-
                     return true;
                 } else {
-                    System.out.println("Incorrect password. Please try again.");
                     return false;
                 }
             } else {
@@ -53,11 +43,9 @@ public class Problem4ab {
                 return false;
             }
         } catch (IOException e) {
-            System.out.println("An error occurred while retrieving user data.");
             e.printStackTrace();
             return false;
         } catch (Exception e) {
-            System.out.println("An unexpected error occurred.");
             e.printStackTrace();
             return false;
         }
